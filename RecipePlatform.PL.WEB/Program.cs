@@ -1,3 +1,9 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using RecipePlatform.DAL.Context;
+using RecipePlatform.Models;
+
 namespace RecipePlatform.PL.WEB
 {
     public class Program
@@ -5,6 +11,17 @@ namespace RecipePlatform.PL.WEB
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var configuration = builder.Configuration;
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+          sqlOptions => sqlOptions.MigrationsAssembly("RecipePlatform.DAL")));
+
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

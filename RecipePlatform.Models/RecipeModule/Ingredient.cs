@@ -13,8 +13,6 @@ namespace RecipePlatform.Models.RecipeModule
         public string Name { get; set; }
         public double Quantity { get; set; }
         public string Unit { get; set; }
-
-
         //to link between ingrendient and recipe
         //One recipe has many ingredients
         public int RecipeId { get; set; }
