@@ -18,20 +18,23 @@ namespace RecipePlatform.Models.RecipeModule
         public int PrepTimeMinutes { get; set; }
         public int CookTimeMinutes { get; set; }
         public int Servings { get; set; }
-        public DifficultyLevel Difficulty { get; set; }
+        public DifficultyLevel Difficulty { get; set; } = DifficultyLevel.easy;
         public DateTime CreatedDate { get; set; }
        
-        public string UserId { get; set; }
-        public int CategoryId { get; set; }
+       
 
-        [ForeignKey(nameof(UserId))]
+      
+        public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
-        [ForeignKey(nameof(CategoryId))]
+        public int CategoryId { get; set; }
         public virtual RecipeCategory Category { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+
+
+
         //many ingrediants in one recipe
         //public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
 
-        public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
 
 
     }

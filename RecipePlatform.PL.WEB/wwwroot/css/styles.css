@@ -1,0 +1,246 @@
+﻿/* Global */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #fafafa;
+    color: #14532d;
+}
+
+a {
+    text-decoration: none;
+    color: #14532d;
+}
+
+/* Fade-in Animation */
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Navbar */
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+/* Top Row */
+.navbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+    .logo img {
+        height: 56px;
+    }
+
+.logo-text {
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 1.2;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    font-size: 1.1rem;
+}
+
+    .nav-menu a.active {
+        border-bottom: 2px solid #14532d;
+    }
+
+/* Buttons */
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-dark {
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+    .btn-dark:hover {
+        opacity: 0.9;
+    }
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #14532d;
+    color: #14532d;
+}
+
+    .btn-outline:hover {
+        background-color: #d1fae5;
+    }
+
+/* Search Bar (at bottom of navbar) */
+.nav-search {
+    margin-top: 1rem;
+    position: relative;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .nav-search input {
+        width: 100%;
+        padding: 0.75rem 1.25rem;
+        border-radius: 9999px;
+        border: 1px solid #ccc;
+        outline: none;
+        transition: 0.3s ease;
+    }
+
+        .nav-search input:focus {
+            border-color: #34d399;
+            box-shadow: 0 0 0 2px #6ee7b7;
+        }
+
+    .nav-search button {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #14532d;
+        color: white;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 9999px;
+        cursor: pointer;
+    }
+
+        .nav-search button:hover {
+            background-color: #064e3b;
+        }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar-top {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .nav-menu,
+    .nav-buttons {
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+
+    .nav-search {
+        width: 90%;
+    }
+}
+
+
+/*Footer */
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrap {
+    flex: 1;
+    /* Optional: add padding or styling to your main content */
+}
+
+/* Footer styles */
+.footer {
+    background-color: #f9faef;
+    padding: 40px 20px 20px;
+    font-family: sans-serif;
+    color: #1b4d2f;
+}
+
+.footer-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    width: 100px;
+    height: auto;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.footer-nav h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .footer-nav ul li {
+        margin-bottom: 8px;
+    }
+
+.footer-nav a {
+    text-decoration: none;
+    color: #1b4d2f;
+}
+
+    .footer-nav a:hover {
+        text-decoration: underline;
+    }
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #333;
+}
