@@ -24,7 +24,7 @@ namespace RecipePlatform.API
                   options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add services to the container.
-       
+
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -45,7 +45,7 @@ namespace RecipePlatform.API
                         .AddEntityFrameworkStores<ApplicationDbContext>()
                         .AddDefaultTokenProviders();
 
-           
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -55,7 +55,7 @@ namespace RecipePlatform.API
 
             var jwtSettings = builder.Configuration.GetSection("Jwt");
             var key = jwtSettings["Key"];
-           
+
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -123,19 +123,20 @@ namespace RecipePlatform.API
                 // Configure the HTTP request pipeline.
 
                 if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                {
+                    app.UseSwagger();
+                    app.UseSwaggerUI();
+                }
+
+                app.UseHttpsRedirection();
+
+                app.UseAuthorization();
+
+
+                app.MapControllers();
+
+                app.Run();
             }
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
         }
     }
 }
