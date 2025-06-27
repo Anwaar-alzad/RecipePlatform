@@ -55,14 +55,12 @@ public class AuthService : IAuthService
 
 
     //فقط الادمن يقدر يحصل على جميع المستخدمين
-    [Authorize(Roles = "Admin")]
-    [HttpGet]
+    //[Authorize(Roles = "Admin")]
     public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
     {
-        var users = _userManager.Users.ToList();
+        var users = _userManager.Users.ToList(); // synchronous call, optional to use await if using .ToListAsync()
         return _mapper.Map<IEnumerable<UserDto>>(users);
     }
-
     private async Task<string> GenerateJwtToken(IdentityUser user)
     {
         var roles = await _userManager.GetRolesAsync(user);
