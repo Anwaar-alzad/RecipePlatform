@@ -21,6 +21,9 @@ namespace RecipePlatform.BLL.Services
             _repo = repo;
             _mapper = mapper;
         }
+
+
+        // create category
         public async Task AddAsync(RecipeCategoryDto dto)
         {
             var entity = _mapper.Map<RecipeCategory>(dto);
@@ -28,6 +31,8 @@ namespace RecipePlatform.BLL.Services
 
             await _repo.AddAsync(entity);
         }
+
+        // delete category  
         public async Task DeleteAsync(int id)
         {
             var entity = await _repo.GetByIdAsync(id);

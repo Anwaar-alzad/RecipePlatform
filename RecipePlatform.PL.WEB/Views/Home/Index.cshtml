@@ -1,8 +1,61 @@
-﻿ @{
-    ViewData["Title"] = "Home Page";
+﻿missing viewmodel
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-star"></i>
+        10 Top Rated Recipes
+    </h1>
 </div>
+
+<div class="recipe-grid">
+    @foreach (var recipe in Model.TopRatedRecipes)
+    {
+        <div class="recipe-card">
+            <div class="recipe-card-header">
+                <div>
+                    <h3 class="recipe-title">@recipe.Name</h3>
+                    <div class="recipe-rating">
+                        <i class="fas fa-star"></i>
+                        <span>@recipe.Rating (@recipe.ReviewCount ratings)</span>
+                    </div>
+                </div>
+                <button class="btn-small">Dinner</button>
+            </div>
+            <div class="recipe-actions">
+                <a href="@Url.Action("Details", "Recipe", new { id = recipe.Id })" class="btn-outline">Show details</a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-clock"></i>
+        Recently added
+    </h1>
+</div>
+
+<div class="recipe-grid">
+    @foreach (var recipe in Model.RecentlyAddedRecipes)
+    {
+        <div class="recipe-card">
+            <div class="recipe-card-header">
+                <div>
+                    <h3 class="recipe-title">@recipe.Name</h3>
+                    <div class="recipe-rating">
+                        <i class="fas fa-star"></i>
+                        <span>@recipe.Rating (@recipe.ReviewCount ratings)</span>
+                    </div>
+                </div>
+                <button class="btn-small">Dinner</button>
+            </div>
+            <div class="recipe-actions">
+                <a href="@Url.Action("Details", "Recipe", new { id = recipe.Id })" class="btn-outline">Show details</a>
+            </div>
+        </div>
+    }
+</div>
+

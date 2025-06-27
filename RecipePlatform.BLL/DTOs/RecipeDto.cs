@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RecipePlatform.Models;
 using RecipePlatform.Models.RecipeModule.Enums;
 
 namespace RecipePlatform.BLL.DTOs
 {
-    public class RecipeDto
+    public class RecipeDto : BaseEntity
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Ingredients { get; set; }
@@ -19,7 +20,7 @@ namespace RecipePlatform.BLL.DTOs
         public int Servings { get; set; }
         public DifficultyLevel Difficulty { get; set; }
 
-        public string? UserId { get; set; } 
+        //public string? UserId { get; set; } 
 
 
 
@@ -31,6 +32,15 @@ namespace RecipePlatform.BLL.DTOs
         //public string UserId { get; set; }
         //under which category this recipe is?
         //public int CategoryId { get; set; }
+
+
+
+        public int TotalTimeMinutes => PrepTimeMinutes + CookTimeMinutes;
+        public string UserId { get; set; } // For response purposes
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public double? AverageRating { get; set; }
+        public int? RatingCount { get; set; }
 
     }
 }

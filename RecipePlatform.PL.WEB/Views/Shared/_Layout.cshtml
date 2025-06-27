@@ -3,59 +3,97 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RecipePlatform.PL.WEB</title>
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
-    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
-    <link rel="stylesheet" href="~/RecipePlatform.PL.WEB.styles.css" asp-append-version="true" />
-    <link href="~/css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="..." crossorigin="anonymous" />
-
+    <title>@ViewData["Title"] - Taste Bud</title>
+	<link rel="stylesheet" href="~/css/styles.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+   
 </head>
 <body>
-    <header>
-        <!-- Navbar -->
-        <nav class="navbar fade-in">
-            <div class="navbar-top">
-                <div class="logo">
-                    <!--         <img src="your-logo.png" alt="Logo" /> -->
-                    <div class="logo-text">
-                        <div>Taste Bud</div>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="@Url.Action("Index", "Home")" class="logo">
+                    <div class="logo-icon">
+						<img src="~/image/LOGO2.png" alt="Taste Bud Logo" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </a>
+
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="@Url.Action("Index", "Home")" class="@(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">Home</a></li>
+                        <li><a href="@Url.Action("Index", "Recipe")" class="@(ViewContext.RouteData.Values["controller"].ToString() == "Recipe" ? "active" : "")">Recipes</a></li>
+                    </ul>
+                </nav>
+
+                <div class="auth-buttons">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span>Welcome, @User.Identity.Name</span>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">Admin</a>
+                        }
+                        <a href="@Url.Action("Logout", "Account")" class="btn btn-primary">Logout</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Register", "Account")" class="btn btn-primary">Register</a>
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-secondary">Login</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @if (ViewBag.ShowSearch != false)
+    {
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <form method="GET" action="@Url.Action("Search", "Recipe")">
+                        <input type="text" name="query" class="search-input" placeholder="Search by recipes or ingredients ..." value="@ViewBag.SearchQuery">
+                        <button type="submit" class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    }
+
+    <main class="main-content">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <img src="~/image/LOGO2.png" alt="Taste Bud Logo" style="width: 100%; height: 100%; object-fit: cover;">
+
+                        </div>
+                        <div class="logo-text">Taste<br>Bud</div>
                     </div>
                 </div>
-
-                <div class="nav-menu">
-                    <a href="#" class="active">Home</a>
-                    <a href="#">Recipes</a>
-                </div>
-
-                <div class="nav-buttons">
-                    <button class="btn btn-dark">Register</button>
-                    <button class="btn btn-outline">Login</button>
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <ul class="footer-nav">
+                        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li><a href="@Url.Action("Index", "Recipe")">Recipes</a></li>
+                    </ul>
                 </div>
             </div>
-
-            <!-- Search Bar moved below -->
-            <div class="nav-search">
-                <input type="text" placeholder="Search by recipes or Ingredients ..." />
-                <button>
-                    <i class="fa-solid fa-search"></i> 
-                </button>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taste Bud</p>
             </div>
-        </nav>
+        </div>
+    </footer>
 
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

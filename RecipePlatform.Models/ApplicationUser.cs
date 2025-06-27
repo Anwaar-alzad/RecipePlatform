@@ -10,8 +10,8 @@ namespace RecipePlatform.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public  string? FirstName { get; set; }
+        public string? LastName { get; set; }
 
         public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
         public ICollection<Recipe> Recipe { get; set; } = new List<Recipe>();

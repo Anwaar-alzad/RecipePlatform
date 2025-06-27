@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RecipePlatform.BLL.DTOs;
+using RecipePlatform.BLL.Interfaces.Services;
 
 namespace RecipePlatform.API.Controllers
 {
@@ -8,17 +10,38 @@ namespace RecipePlatform.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        //create / Register api 
-        [HttpPost("register")]
-        public IActionResult Register(RegisterDto dto)
+        private readonly IAuthService _authService;
+
+        public AuthController(IAuthService authService)
         {
-            // Logic to register a new user
-            // This could include saving user details to the database
-            return Ok("User registered successfully");
+            _authService = authService;
         }
 
 
 
-        //authenticate user / Login / verify user credentials
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(RegisterDto dto)
+        {
+            var tokenOrError = await _authService.RegisterAsync(dto);
+
+            if (tokenOrError.StartsWith("Invalid") || tokenOrError.Contains("Password") || tokenOrError.Contains("failed"))
+                return BadRequest(tokenOrError);
+
+            return Ok(new { token = tokenOrError });
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDto dto)
+        {
+            var tokenOrError = await _authService.LoginAsync(dto);
+            if (tokenOrError == "Invalid email or password")
+                return Unauthorized();
+
+
+            // redirect if autheticated
+            return Ok(new { token = tokenOrError });
+        }
+
     }
 }

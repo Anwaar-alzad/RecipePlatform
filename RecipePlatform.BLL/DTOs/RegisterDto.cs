@@ -20,7 +20,7 @@ namespace RecipePlatform.BLL.DTOs
         [Required]
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
         public string ConfirmPassword { get; set; }
-        public string Role { get; set; } = "User"; // Default role
+        //public string Role { get; set; } = "User"; // Default role
     
 
 
